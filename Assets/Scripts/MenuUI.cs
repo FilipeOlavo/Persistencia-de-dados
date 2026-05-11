@@ -10,6 +10,6 @@ public class MenuUI : MonoBehaviour
     {
         MenuManager.Instance.playerName = inputName.text;
 
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Main");
     }
 }

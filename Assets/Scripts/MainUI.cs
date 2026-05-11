@@ -8,6 +8,6 @@ public class MainUI : MonoBehaviour
     private void Start()
     {
         playerText.text =
-            "Player: " + MenuManager.Instance.playerName;
+            "Name: " + MenuManager.Instance.playerName;
     }
 }
