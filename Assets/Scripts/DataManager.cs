@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using UnityEngine;
 
@@ -9,13 +10,6 @@ public class DataManager : MonoBehaviour
     public int bestScore;
 
     private string savePath;
-
-    [System.Serializable]
-    class SaveData
-    {
-        public string playerName;
-        public int highScore;
-    }
 
     private void Awake()
     {
@@ -35,7 +29,7 @@ public class DataManager : MonoBehaviour
         LoadData();
     }
 
-    public void SaveDataFile()
+    public void SaveData()
     {
         SaveData data = new SaveData();
 
@@ -59,5 +53,10 @@ public class DataManager : MonoBehaviour
             bestPlayerName = data.playerName;
             bestScore = data.highScore;
         }
+    }
+
+    internal void SaveDataFile()
+    {
+        throw new NotImplementedException();
     }
 }
