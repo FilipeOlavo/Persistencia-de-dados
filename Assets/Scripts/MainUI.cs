@@ -1,13 +1,18 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MainUI : MonoBehaviour
 {
-    public TextMeshProUGUI playerText;
+    public Text playerText;
 
-    private void Update()
+    void Start()
     {
-       
-    playerText.text = "Name: " + MenuManager.Instance.playerName;
+        if (playerText != null &&
+            MenuManager.Instance != null)
+        {
+            playerText.text =
+                "Name : " +
+                MenuManager.Instance.playerName;
+        }
     }
 }

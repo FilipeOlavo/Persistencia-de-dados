@@ -1,6 +1,6 @@
-using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuUI : MonoBehaviour
 {
@@ -8,8 +8,9 @@ public class MenuUI : MonoBehaviour
 
     public void StartGame()
     {
-        MenuManager.Instance.playerName = inputName.text;
+        MenuManager.Instance.playerName =
+            inputName.text;
 
-        SceneManager.LoadScene("Main");
+        SceneManager.LoadScene(1);
     }
 }

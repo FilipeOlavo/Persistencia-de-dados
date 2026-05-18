@@ -1,5 +1,5 @@
-using System;
 using System.IO;
+using TMPro;
 using UnityEngine;
 
 public class DataManager : MonoBehaviour
@@ -8,6 +8,8 @@ public class DataManager : MonoBehaviour
 
     public string bestPlayerName;
     public int bestScore;
+
+    public TMP_Text bestScoreText;
 
     private string savePath;
 
@@ -24,19 +26,40 @@ public class DataManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         savePath =
-            Application.persistentDataPath + "/savefile.json";
+            Application.persistentDataPath +
+            "/savefile.json";
 
         LoadData();
     }
 
+    private void Update()
+    {
+        if (bestScoreText != null)
+        {
+            bestScoreText.text =
+                "Best Score : " +
+                bestPlayerName +
+                " : " +
+                bestScore;
+        }
+    }
+
+    [System.Serializable]
+    class SaveFile
+    {
+        public string playerName;
+        public int highScore;
+    }
+
     public void SaveData()
     {
-        SaveData data = new SaveData();
+        SaveFile data = new SaveFile();
 
         data.playerName = bestPlayerName;
         data.highScore = bestScore;
 
-        string json = JsonUtility.ToJson(data);
+        string json =
+            JsonUtility.ToJson(data);
 
         File.WriteAllText(savePath, json);
     }
@@ -45,18 +68,26 @@ public class DataManager : MonoBehaviour
     {
         if (File.Exists(savePath))
         {
-            string json = File.ReadAllText(savePath);
+            string json =
+                File.ReadAllText(savePath);
 
-            SaveData data =
-                JsonUtility.FromJson<SaveData>(json);
+            SaveFile data =
+                JsonUtility.FromJson<SaveFile>(json);
 
-            bestPlayerName = data.playerName;
-            bestScore = data.highScore;
+            bestPlayerName =
+                data.playerName;
+
+            bestScore =
+                data.highScore;
         }
-    }
 
-    internal void SaveDataFile()
-    {
-        throw new NotImplementedException();
+        if (bestScoreText != null)
+        {
+            bestScoreText.text =
+                "Best Score : " +
+                bestPlayerName +
+                " : " +
+                bestScore;
+        }
     }
 }
